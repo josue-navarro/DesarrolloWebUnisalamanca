@@ -1,0 +1,503 @@
+/* ================================================
+   VARIABLES: el corazón del diseño
+   Cambiar una variable → toda la página cambia
+================================================ */
+:root {
+  --acento: #00f5a0;
+  --acento-rgb: 0, 245, 160;
+
+  /* TEMA OSCURO (por defecto) */
+  --fondo: #0a0a0f;
+  --fondo-card: #111118;
+  --fondo-card2: #16161f;
+  --borde: #ffffff12;
+  --texto: #f0f0f8;
+  --texto-suave: #7a7a9a;
+  --sombra-card: 0 40px 100px rgba(0,0,0,0.7);
+}
+
+/* TEMA CLARO */
+[data-theme="light"] {
+  --fondo: #f0f0f5;
+  --fondo-card: #ffffff;
+  --fondo-card2: #f5f5fa;
+  --borde: #00000010;
+  --texto: #0a0a1a;
+  --texto-suave: #7070a0;
+  --sombra-card: 0 40px 100px rgba(0,0,0,0.12);
+}
+
+/* ================================================
+   RESET
+================================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================================================
+   BODY
+================================================ */
+body {
+  font-family: 'Urbanist', sans-serif;
+  background-color: var(--fondo);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: background-color 0.5s ease;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Fondo con gradiente animado */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(var(--acento-rgb), 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 80% 80%, rgba(var(--acento-rgb), 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  transition: all 0.5s;
+  z-index: 0;
+}
+
+/* ================================================
+   ENCABEZADO DE CLASE
+================================================ */
+.clase-header {
+  text-align: center;
+  margin-bottom: 36px;
+  position: relative;
+  z-index: 1;
+  animation: fadeDown 0.7s ease both;
+}
+
+.clase-badge {
+  display: inline-block;
+  border: 1px solid var(--borde);
+  background: var(--fondo-card2);
+  color: var(--acento);
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 30px;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+.clase-titulo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  color: var(--texto);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.clase-titulo span {
+  color: var(--acento);
+}
+
+.clase-sub {
+  color: var(--texto);
+  font-size: 0.9rem;
+  margin-top: 8px;
+  font-weight: 300;
+}
+
+/* ================================================
+   TARJETA PRINCIPAL
+================================================ */
+.tarjeta {
+  background: var(--fondo-card);
+  border: 1px solid var(--borde);
+  border-radius: 28px;
+  padding: 36px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--sombra-card);
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 0.8s 0.1s ease both;
+  transition: background-color 0.5s, border-color 0.5s, box-shadow 0.5s;
+}
+
+/* Línea de acento en la parte superior */
+.tarjeta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 36px; right: 36px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--acento), transparent);
+  border-radius: 2px;
+  transition: background 0.4s;
+}
+
+/* ================================================
+   CONTROLES: paleta + toggle tema
+================================================ */
+.controles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.paleta {
+  display: flex;
+  gap: 8px;
+}
+
+.color-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.color-btn:hover {
+  transform: scale(1.25);
+}
+
+.color-btn.activo {
+  border-color: var(--texto);
+  transform: scale(1.2);
+}
+
+.theme-toggle {
+  background: var(--fondo-card2);
+  border: 1px solid var(--borde);
+  border-radius: 30px;
+  padding: 6px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--texto-suave);
+  font-family: 'Urbanist', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--acento);
+  color: var(--acento);
+}
+
+/* ================================================
+   AVATAR Y PERFIL
+================================================ */
+.perfil-top {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 3px solid var(--acento);
+  object-fit: cover;
+  display: block;
+  transition: border-color 0.4s;
+}
+
+/* Punto de "online" con pulso */
+.online-dot {
+  position: absolute;
+  bottom: 3px; right: 3px;
+  width: 16px; height: 16px;
+  background: #22c55e;
+  border-radius: 50%;
+  border: 2px solid var(--fondo-card);
+}
+
+.online-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: #22c55e55;
+  animation: pulse 2s infinite;
+}
+
+.perfil-info {
+  flex: 1;
+}
+
+.nombre {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.9rem;
+  color: var(--texto);
+  letter-spacing: 1px;
+  line-height: 1;
+  margin-bottom: 4px;
+  transition: color 0.5s;
+}
+
+.rol {
+  font-size: 0.78rem;
+  color: var(--acento);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: color 0.4s;
+}
+
+/* ================================================
+   SKILLS TAGS
+================================================ */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.tag {
+  background: var(--fondo-card2);
+  border: 1px solid var(--borde);
+  color: var(--texto-suave);
+  font-size: 0.75rem;
+  padding: 5px 12px;
+  border-radius: 20px;
+  transition: all 0.3s;
+  cursor: default;
+}
+
+.tag:hover {
+  border-color: var(--acento);
+  color: var(--acento);
+  transform: translateY(-2px);
+}
+
+/* ================================================
+   BIO
+================================================ */
+.bio {
+  font-size: 0.9rem;
+  color: var(--texto);
+  line-height: 1.75;
+  font-weight: 300;
+  border-left: 2px solid var(--acento);
+  padding-left: 14px;
+  margin-bottom: 24px;
+  transition: border-color 0.4s, color 0.5s;
+}
+
+/* ================================================
+   STATS
+================================================ */
+.stats {
+  display: flex;
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 8px;
+  border-right: 1px solid var(--borde);
+  transition: background 0.3s, border-color 0.5s;
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.stat:hover {
+  background: var(--fondo-card2);
+}
+
+.stat-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--texto);
+  letter-spacing: 1px;
+}
+
+.stat-l {
+  font-size: 0.7rem;
+  color: var(--texto);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* ================================================
+   BOTONES
+================================================ */
+.acciones {
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  flex: 1;
+  padding: 15px;
+  border-radius: 14px;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.btn-primario {
+  background: var(--acento);
+  color: #050510;
+  transition: background 0.4s, transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-primario:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(var(--acento-rgb), 0.35);
+}
+
+.btn-primario:active {
+  transform: scale(0.96);
+}
+
+.btn-secundario {
+  background: transparent;
+  color: var(--texto);
+  border: 1px solid var(--borde);
+}
+
+.btn-secundario:hover {
+  border-color: var(--acento);
+  color: var(--acento);
+}
+
+/* ================================================
+   PANEL EDUCATIVO
+================================================ */
+.edu-panel {
+  margin-top: 28px;
+  background: var(--fondo-card);
+  border: 1px solid var(--borde);
+  border-radius: 20px;
+  padding: 24px 28px;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 0.8s 0.25s ease both;
+  transition: background 0.5s, border-color 0.5s;
+}
+
+.edu-titulo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  color: var(--acento);
+  margin-bottom: 16px;
+}
+
+.conceptos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.concepto {
+  background: var(--fondo-card2);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+}
+
+.concepto:hover {
+  border-color: var(--acento);
+  color: var(--texto);
+  transform: translateX(4px);
+}
+
+.concepto-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+code {
+  background: var(--fondo-card2);
+  color: var(--acento);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  border: 1px solid var(--borde);
+}
+
+.reto {
+  margin-top: 16px;
+  background: rgba(var(--acento-rgb), 0.06);
+  border: 1px solid rgba(var(--acento-rgb), 0.2);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 0.82rem;
+  color: var(--texto);
+  line-height: 1.7;
+}
+
+.reto strong {
+  color: var(--acento);
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+/* ================================================
+   ANIMACIONES
+================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50%       { transform: scale(1.5); opacity: 0; }
+}
+
+/* ================================================
+   RESPONSIVE: celular
+================================================ */
+@media (max-width: 480px) {
+  .tarjeta { padding: 24px; border-radius: 22px; }
+  .nombre { font-size: 1.6rem; }
+  .conceptos { grid-template-columns: 1fr; }
+  .clase-titulo { font-size: 2rem; }
+  .edu-panel { padding: 20px; }
+}

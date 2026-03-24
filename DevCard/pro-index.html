@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Tarjeta de Perfil · Dev Card</title>
+
+  <!-- Fuentes de Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Urbanist:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet"/>
+
+  <!-- Librería de confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- Nuestro archivo CSS -->
+  <link rel="stylesheet" href="pro-styles.css" />
+</head>
+<body>
+
+  <!-- ENCABEZADO DE CLASE -->
+  <div class="clase-header">
+    <div class="clase-badge">✦ Desarrollo Web I · Ejercicio 03</div>
+    <h1 class="clase-titulo">Tu <span>Dev Card</span><br>interactiva</h1>
+    <p class="clase-sub">Personaliza cada elemento · Cambia colores · Hazla tuya</p>
+  </div>
+
+  <!-- TARJETA PRINCIPAL -->
+  <div class="tarjeta">
+
+    <!-- CONTROLES: paleta + toggle tema -->
+    <div class="controles">
+      <div class="paleta">
+        <button class="color-btn activo" data-color="#2500f5" data-rgb="37, 0, 245"
+          style="background:#2500f5" title="Verde neón" onclick="cambiarColor(this)"></button>
+        <button class="color-btn" data-color="#b3049bbd" data-rgb="179, 4, 155"
+          style="background:#b3049bbd" title="Naranja" onclick="cambiarColor(this)"></button>
+        <button class="color-btn" data-color="#818cf8" data-rgb="129, 200, 248"
+          style="background:#81c8f8" title="Índigo" onclick="cambiarColor(this)"></button>
+        <button class="color-btn" data-color="#e5f505" data-rgb="229, 245, 5"
+          style="background:#e5f505" title="Amarillo" onclick="cambiarColor(this)"></button>
+        <button class="color-btn" data-color="#f50000" data-rgb="245, 0, 0"
+          style="background:#f50000" title="Rojo" onclick="cambiarColor(this)"></button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTema(this)">
+        <span id="tema-icon">☀️</span>
+        <span id="tema-texto">Claro</span>
+      </button>
+    </div>
+
+    <!-- PERFIL: avatar + nombre -->
+    <div class="perfil-top">
+      <div class="avatar-wrap">
+        <!-- 🔧 RETO: cambia "Profe" por tu nombre -->
+        <img class="avatar" id="avatar-img"
+          src="https://api.dicebear.com/7.x/adventurer/svg?seed=Patron"
+          alt="Avatar"/>
+        <div class="online-dot"></div>
+      </div>
+      <div class="perfil-info">
+        <!-- 🔧 RETO: pon tu nombre y rol real -->
+        <div class="nombre">Josue David Navarro Lopez</div>
+        <div class="rol">Frontend Developer</div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="skills">
+      <span class="tag">HTML5</span>
+      <span class="tag">CSS3</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">Responsive</span>
+      <span class="tag">Git</span>
+    </div>
+
+    <!-- BIO -->
+    <!-- 🔧 RETO: cambia este texto por tu descripción real -->
+    <p class="bio">
+      Estudiante apasionado/a por el desarrollo web.
+      Construyendo proyectos reales desde el primer día de clase. 🚀
+    </p>
+
+    <!-- ESTADÍSTICAS -->
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-n">12</span>
+        <span class="stat-l">Proyectos</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">3</span>
+        <span class="stat-l">Semanas</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">100</span>
+        <span class="stat-l">% Activo</span>
+      </div>
+    </div>
+
+    <!-- BOTONES -->
+    <div class="acciones">
+      <button class="btn btn-primario" onclick="lanzarConfetti(this)">¡Seguir! 🎉</button>
+      <button class="btn btn-secundario" onclick="compartir()">Compartir</button>
+    </div>
+
+  </div>
+
+  <!-- PANEL EDUCATIVO -->
+  <div class="edu-panel">
+    <div class="edu-titulo">🎯 Conceptos de esta clase</div>
+    <div class="conceptos">
+      <div class="concepto"><span class="concepto-icon">🎨</span><span><code>:root</code> Variables CSS</span></div>
+      <div class="concepto"><span class="concepto-icon">🌗</span><span><code>data-theme</code> Dark/Light</span></div>
+      <div class="concepto"><span class="concepto-icon">📐</span><span><code>display: grid</code></span></div>
+      <div class="concepto"><span class="concepto-icon">📱</span><span><code>@media</code> Responsive</span></div>
+      <div class="concepto"><span class="concepto-icon">✨</span><span><code>transition</code> Suavidad</span></div>
+      <div class="concepto"><span class="concepto-icon">⚡</span><span><code>onclick</code> Eventos JS</span></div>
+      <div class="concepto"><span class="concepto-icon">🎭</span><span><code>@keyframes</code> Animación</span></div>
+      <div class="concepto"><span class="concepto-icon">🔧</span><span><code>clamp()</code> Tipografía</span></div>
+    </div>
+    <div class="reto">
+      <strong>🔥 Tu reto de hoy:</strong>
+      1. Cambia los colores con la paleta de arriba<br>
+      2. Pon tu nombre, rol y bio reales<br>
+      3. Cambia el <code>seed=Profe</code> del avatar por tu nombre<br>
+      4. Prueba el modo claro/oscuro<br>
+      5. Dale al botón "¡Seguir!" 🎉
+    </div>
+  </div>
+
+  <!-- Nuestro archivo JavaScript -->
+  <script src="app.js"></script>
+
+</body>
+</html>
